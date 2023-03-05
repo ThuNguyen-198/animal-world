@@ -1,0 +1,143 @@
+/* Color Pallet */
+/* 1-easy #FFC874 */
+/* 2-medium #F9B127  */
+/* 3-hard #D16325 */
+/* 4-expert #A81F1F */
+/* text #403c3b */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+p,
+h1 {
+  margin: 0;
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("./assets/bg-sky.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.app-title {
+  font-size: 50px;
+  font-weight: 600;
+  padding-top: 40px;
+  color: #403c3b;
+  text-transform: capitalize;
+}
+.greeting {
+  font-size: 30px;
+  font-weight: 400;
+}
+.num-of-cards {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.level-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  left: 240px;
+  top: 240px;
+}
+.level-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.level-block:active {
+  transform: scale(0.95);
+}
+.level {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+.level-name {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.card-container {
+  perspective: 1000px;
+}
+.card {
+  position: relative;
+  width: 500px;
+  height: 300px;
+  display: block;
+  margin-bottom: 20px;
+  border: 2px solid #403c3b;
+  border-radius: 11px;
+  transform-style: preserve-3d;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.card.flipped {
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+.animal-img {
+  height: 80%;
+  border-radius: 11px;
+  display: block;
+}
+.animal-name {
+  font-size: 40px;
+  font-weight: 600;
+  color: #403c3b;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  background-color: #539036;
+  font-size: 25px;
+  border-radius: 11px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+button:active {
+  transform: scale(0.95);
+}
+.all {
+  background-color: #403c3b;
+}
+.easy {
+  background-color: #ffc874;
+}
+.medium {
+  background-color: #f9b127;
+}
+.hard {
+  background-color: #d16325;
+}
+.expert {
+  background-color: #a81f1f;
+}
