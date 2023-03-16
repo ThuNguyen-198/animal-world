@@ -71,14 +71,30 @@ h1 {
   font-size: 20px;
   font-weight: 400;
 }
-
+.streak-block {
+  position: absolute;
+  right: 240px;
+  top: 360px;
+}
+.streak-label {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.streak-number {
+  font-size: 20px;
+  font-weight: 500;
+  border: 2px solid #403c3b;
+  border-radius: 11px;
+  color: #539036;
+}
 .card-container {
   perspective: 1000px;
 }
 .card {
   position: relative;
-  width: 500px;
-  height: 300px;
+  width: 450px;
+  height: 250px;
   display: block;
   margin-bottom: 20px;
   border: 2px solid #403c3b;
@@ -113,15 +129,53 @@ h1 {
   font-weight: 600;
   color: #403c3b;
 }
-
-button {
-  width: 100px;
-  height: 50px;
-  background-color: #539036;
-  font-size: 25px;
+.change-card-btn-block {
+  display: flex;
+  gap: 20px;
+}
+.user-input-block {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+input:focus {
+  outline: none;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+.user-input {
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
   border-radius: 11px;
-  padding: 8px 16px;
+  padding: 4px 8px;
+}
+.true {
+  border: 2px solid #539036;
+}
+.false {
+  border: 2px solid red;
+}
+.none {
+  border: none;
+}
+button {
+  font-size: 20px;
+  border-radius: 11px;
+  padding: 4px 8px;
   cursor: pointer;
+}
+.btn-next,
+.btn-back {
+  width: 70px;
+  height: 40px;
+  background-color: #539036;
+}
+.btn-check-answer {
+  width: 70px;
+  height: 40px;
+  background-color: #539036;
 }
 button:active {
   transform: scale(0.95);
