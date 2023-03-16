@@ -14,8 +14,8 @@ import frogfish from "./assets/animals/hairy-frogfish.png";
 import "./App.css";
 
 const cards = [
-  { img: elephant, name: "elephant", level: "easy" },
-  { img: lion, name: "lion", level: "easy" },
+  { img: elephant, name: "Elephant", level: "easy" },
+  { img: lion, name: "Lion", level: "easy" },
   { img: elephantShrew, name: "Elephant Shrew", level: "expert" },
   { img: hippo, name: "Hippo", level: "medium" },
   { img: pangolin, name: "Pangolin", level: "hard" },
@@ -27,13 +27,34 @@ const cards = [
 ];
 
 const App = () => {
-  const [randomCard, setRandomCard] = useState(1);
-  const selectRandomCard = () => {
-    const randomIndex = Math.floor(Math.random() * cards.length);
-    const card = cards[randomIndex];
-    setRandomCard(card);
-  };
+  //Part 1 required to display cards in random order
+  // const [randomCard, setRandomCard] = useState(1);
+  // const selectRandomCard = () => {
+  //   const randomIndex = Math.floor(Math.random() * cards.length);
+  //   const card = cards[randomIndex];
+  //   setRandomCard(card);
+  //   setResult("none");
+  // };
 
+  const [cardOrder, setCardOrder] = useState(0);
+  const [card, setCard] = useState(cards[0]);
+  const getNextCard = () => {
+    setCardOrder((cardOrder + 1) % cards.length);
+    const displayedCard = cards[cardOrder];
+    setCard(displayedCard);
+    setResult("none");
+    setInput("");
+    setFlipped(false);
+  };
+  const getPrevCard = () => {
+    setCardOrder(cardOrder - 1);
+
+    const displayedCard = cards[cardOrder];
+    setCard(displayedCard);
+    setResult("none");
+    setInput("");
+    setFlipped(false);
+  };
   const [display, setDisplay] = useState(1);
   const setCardDisplay = () => {
     setDisplay(display * -1);
@@ -43,6 +64,26 @@ const App = () => {
   const [isFlipped, setFlipped] = useState(false);
   const flipCard = () => {
     setFlipped(!isFlipped);
+  };
+
+  const [streak, setStreak] = useState(0);
+  const [result, setResult] = useState("none");
+
+  const [input, setInput] = useState("");
+  const handleChange = (event) => {
+    setInput(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(input);
+    if (input.toLowerCase() == card.name.toLowerCase()) {
+      setResult("true");
+      setStreak(streak + 1);
+    } else {
+      setResult("false");
+      setStreak(0);
+    }
+    console.log(result);
   };
 
   const [level, setLevel] = useState("all");
@@ -69,49 +110,63 @@ const App = () => {
       <p className="num-of-cards">Number of cards: {cards.length}</p>
       <div className="level-container">
         <div className="level-block" onClick={selectAllLevel}>
-          <div class="level all"></div>
+          <div className="level all"></div>
           <p className="level-name">All</p>
         </div>
         <div className="level-block" onClick={selectEasyLevel}>
-          <div class="level easy"></div>
+          <div className="level easy"></div>
           <p className="level-name">Easy</p>
         </div>
         <div className="level-block" onClick={selectMediumLevel}>
-          <div class="level medium"></div>
+          <div className="level medium"></div>
           <p className="level-name">Medium</p>
         </div>
         <div className="level-block" onClick={selectHardLevel}>
-          <div class="level hard"></div>
+          <div className="level hard"></div>
           <p className="level-name">Hard</p>
         </div>
         <div className="level-block" onClick={selectExpertLevel}>
-          <div class="level expert"></div>
+          <div className="level expert"></div>
           <p className="level-name">Expert</p>
         </div>
       </div>
-      {randomCard && (
+      {card && (
         <div className="card-container" onClick={flipCard}>
           <div className={isFlipped ? "card flipped" : "card"}>
-            <div className={"card-front " + randomCard.level}>
-              <img
-                className="animal-img"
-                src={randomCard.img}
-                alt={randomCard.name}
-              />
+            <div className={"card-front " + card.level}>
+              <img className="animal-img" src={card.img} alt={card.name} />
             </div>
-            <div className="card-back">
-              <p className="animal-name">{randomCard.name}</p>
+            <div className={"card-back " + card.level}>
+              <p className="animal-name">{card.name}</p>
             </div>
           </div>
         </div>
-        // <Card
-        //   name={randomCard.name}
-        //   img={randomCard.img}
-        //   level={randomCard.level}
-        //   onClick={setDisplay}
-        // />
       )}
-      <button onClick={selectRandomCard}>Next</button>
+      <div className="streak-block">
+        <p className="streak-label">Longest Streak</p>
+        <p className="streak-number">{streak}</p>
+      </div>
+      <form className="user-input-block" onSubmit={handleSubmit}>
+        <input
+          placeholder="Your Answer"
+          type="text"
+          className={"user-input " + result}
+          value={input}
+          onChange={handleChange}
+        />
+        <button type="submit" className="btn-check-answer">
+          Check
+        </button>
+      </form>
+
+      <div className="change-card-btn-block">
+        <button className="btn-back" onClick={getPrevCard}>
+          Back
+        </button>
+        <button className="btn-next" onClick={getNextCard}>
+          Next
+        </button>
+      </div>
     </div>
   );
 };
